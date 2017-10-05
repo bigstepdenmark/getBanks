@@ -1,7 +1,8 @@
+// This applications purpose is determine the most appropriate banks from rule base web service
 package dk.cphsoftdev.app.entity;
 
-
 public class Bank {
+
    private int creditScore;
    private int minCreditScore;
    private String bankName;
@@ -27,7 +28,6 @@ public class Bank {
     public void setMinCreditScore(int minCreditScore) {
         this.minCreditScore = minCreditScore;
     }
-
     public String getBankName() {
         return bankName;
     }
