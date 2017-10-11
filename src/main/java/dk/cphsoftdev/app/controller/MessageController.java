@@ -16,6 +16,7 @@ public class MessageController {
         this.mapper = new ObjectMapper();
     }
 
+    // Til SenderController
     public MessageController(Object object) {
         this.object = object;
         this.mapper = new ObjectMapper();
@@ -54,5 +55,7 @@ public class MessageController {
             return null;
         }
     }
-    
+
+
+
 }

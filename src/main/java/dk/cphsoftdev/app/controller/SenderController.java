@@ -22,6 +22,24 @@ public class SenderController {
         this.username = username;
         this.queueName = queueName;
         this.host = host;
+        connect();
+    }
+
+    public boolean connect() {
+        try
+        {
+            return createFactory() && newConnection() && createChannel();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        catch(TimeoutException e)
+        {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
 
@@ -47,19 +65,27 @@ public class SenderController {
         return factory.getHost().equals(host);
     }
 
-    public boolean newConnection(){
+    private boolean newConnection() throws IOException, TimeoutException {
 
+        if( connection == null )
+            connection = factory.newConnection();
 
-        return true;
+        return connection.isOpen();
+    }
 
+    private boolean createChannel() throws IOException, TimeoutException
+    {
+        if( channel == null )
+            channel = connection.createChannel();
 
+        return channel.isOpen();
     }
 
     public void SendMSG(Bank bank){
          String response = "Message was not delivered!";
 
         if(isValid(bank)){
-            response =  basicPublish( bank );
+            response =  Publish( bank );
         }
 
         System.out.println(response);
@@ -69,12 +95,17 @@ public class SenderController {
          return bank.getBankName() != null && bank.getCreditScore() >= 0 && bank.getMinCreditScore() >= 0;
     }
 
-    private String basicPublish(Bank bank){
-
-
-
-
-        return null;
+    private String Publish(Bank bank){
+        MessageController msg = new MessageController(bank);
+        try {
+            channel.queueDeclare(queueName,false,false,false,null);
+            channel.basicPublish("",queueName,null,msg.asByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+         return "[Sent] --> '" + msg.asString() + "'";
     }
+
+
 
 }
