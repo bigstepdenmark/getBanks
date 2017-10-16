@@ -25,7 +25,7 @@ public class SenderController {
         connect();
     }
 
-    public boolean connect() {
+    private boolean connect() {
         try
         {
             return createFactory() && newConnection() && createChannel();
@@ -56,7 +56,7 @@ public class SenderController {
         return false;
     }
 
-    public boolean createFactory(){
+    private boolean createFactory(){
         if(factory == null){factory = new ConnectionFactory();}
 
         factory.setHost(host);
@@ -73,8 +73,7 @@ public class SenderController {
         return connection.isOpen();
     }
 
-    private boolean createChannel() throws IOException, TimeoutException
-    {
+    private boolean createChannel() throws IOException, TimeoutException {
         if( channel == null )
             channel = connection.createChannel();
 
@@ -105,7 +104,6 @@ public class SenderController {
         }
          return "[Sent] --> '" + msg.asString() + "'";
     }
-
 
 
 }
