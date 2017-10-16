@@ -3,22 +3,14 @@ package dk.cphsoftdev.app.entity;
 
 public class Bank {
 
-   private int creditScore;
-   private int minCreditScore;
-   private String bankName;
+    private int minCreditScore;
+    private String name;
+    private int id;
 
-    public Bank(int creditScore, int minCreditScore, String bankName) {
-        this.creditScore = creditScore;
+    public Bank(int minCreditScore, String name, int id) {
         this.minCreditScore = minCreditScore;
-        this.bankName = bankName;
-    }
-
-    public int getCreditScore() {
-        return creditScore;
-    }
-
-    public void setCreditScore(int creditScore) {
-        this.creditScore = creditScore;
+        this.name = name;
+        this.id = id;
     }
 
     public int getMinCreditScore() {
@@ -28,20 +20,34 @@ public class Bank {
     public void setMinCreditScore(int minCreditScore) {
         this.minCreditScore = minCreditScore;
     }
-    public String getBankName() {
-        return bankName;
+
+    public String getName() {
+        return name;
     }
 
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "Bank{" +
-                "creditScore=" + creditScore +
-                ", minCreditScore=" + minCreditScore +
-                ", bankName='" + bankName + '\'' +
+                "minCreditScore=" + minCreditScore +
+                ", name='" + name + '\'' +
+                ", id=" + id +
                 '}';
     }
+
+
 }
+
+
+

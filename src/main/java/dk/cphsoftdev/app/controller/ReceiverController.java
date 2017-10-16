@@ -12,7 +12,7 @@ public class ReceiverController {
     private String username;
     private ConnectionFactory factory;
     private Connection connection;
-    Channel channel;
+    private Channel channel;
 
 
     public ReceiverController(String queueName, String host, String username) {
@@ -108,7 +108,6 @@ public class ReceiverController {
 
         return channel.isOpen();
     }
-
 
 
 }
