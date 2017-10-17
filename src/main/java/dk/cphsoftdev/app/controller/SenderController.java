@@ -91,8 +91,9 @@ public class SenderController {
     }
 
     private boolean isValid(Bank bank){
-         return bank.getBankName() != null && bank.getCreditScore() >= 0 && bank.getMinCreditScore() >= 0;
+         return bank.getName() != null && bank.getMinCreditScore() >= 0;
     }
+
 
     private String Publish(Bank bank){
         MessageController msg = new MessageController(bank);
