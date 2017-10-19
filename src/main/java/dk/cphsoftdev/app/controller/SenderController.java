@@ -42,7 +42,6 @@ public class SenderController {
         return false;
     }
 
-
     public boolean close(){
         try {
             channel.close();
@@ -94,7 +93,6 @@ public class SenderController {
          return bank.getName() != null && bank.getMinCreditScore() >= 0;
     }
 
-
     private String Publish(Bank bank){
         MessageController msg = new MessageController(bank);
         try {
@@ -106,5 +104,5 @@ public class SenderController {
          return "[Sent] --> '" + msg.asString() + "'";
     }
 
-
 }
+

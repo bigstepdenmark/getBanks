@@ -1,16 +1,18 @@
 package dk.cphsoftdev.app.entity;
 public class Loan {
 
-    private int ssn;
-    private int creditScore;
-    private int loanAmount;
-    private String date;
+    private int ssn,creditScore,
+            loanAmount,date;
 
-    public Loan(int ssn, int creditScore, int loanAmount, String date) {
+
+    public Loan(int ssn, int creditScore, int loanAmount, int date) {
         this.ssn = ssn;
         this.creditScore = creditScore;
         this.loanAmount = loanAmount;
         this.date = date;
+    }
+
+    public Loan() {
     }
 
     public int getSsn() {
@@ -37,11 +39,11 @@ public class Loan {
         this.loanAmount = loanAmount;
     }
 
-    public String getDate() {
+    public int getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(int date) {
         this.date = date;
     }
 
@@ -51,7 +53,7 @@ public class Loan {
                 "ssn=" + ssn +
                 ", creditScore=" + creditScore +
                 ", loanAmount=" + loanAmount +
-                ", date='" + date + '\'' +
+                ", date=" + date +
                 '}';
     }
 }

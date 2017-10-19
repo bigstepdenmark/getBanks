@@ -5,12 +5,13 @@ public class Bank {
 
     private int minCreditScore;
     private String name;
-    private int id;
+    private int TSId;
 
-    public Bank(int minCreditScore, String name, int id) {
+
+    public Bank(int minCreditScore, String name, int TSId) {
         this.minCreditScore = minCreditScore;
         this.name = name;
-        this.id = id;
+        this.TSId = TSId;
     }
 
     public int getMinCreditScore() {
@@ -29,12 +30,12 @@ public class Bank {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getTSId() {
+        return TSId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTSId(int TSId) {
+        this.TSId = TSId;
     }
 
     @Override
@@ -42,11 +43,10 @@ public class Bank {
         return "Bank{" +
                 "minCreditScore=" + minCreditScore +
                 ", name='" + name + '\'' +
-                ", id=" + id +
+                ", TSId=" + TSId +
                 '}';
     }
-
-
+    
 }
 
 

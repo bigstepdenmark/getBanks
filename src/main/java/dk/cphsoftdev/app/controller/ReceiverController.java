@@ -14,7 +14,6 @@ public class ReceiverController {
     private Connection connection;
     private Channel channel;
 
-
     public ReceiverController(String queueName, String host, String username) {
         this.queueName = queueName;
         this.host = host;
