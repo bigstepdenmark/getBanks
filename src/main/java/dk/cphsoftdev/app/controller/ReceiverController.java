@@ -1,7 +1,6 @@
 package dk.cphsoftdev.app.controller;
 
 import com.rabbitmq.client.*;
-import dk.cphsoftdev.app.entity.Bank;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,19 +19,10 @@ public class ReceiverController {
         this.queueName = queueName;
         this.host = host;
         this.username = username;
-
         connect();
     }
 
-    public void printMessages() {
-        try {
-            handleDelivery();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean connect() {
+    private boolean connect() {
         try {
             return createFactory() && newConnection() && createChannel();
         } catch (IOException e) {
@@ -48,7 +38,6 @@ public class ReceiverController {
         try {
             channel.close();
             connection.close();
-
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -56,37 +45,6 @@ public class ReceiverController {
             e.printStackTrace();
         }
         return false;
-    }
-
-    private boolean isValid(Bank bank){
-        return bank.getName() != null && bank.getMinCreditScore() >= 0;
-    }
-
-
-
-    private ArrayList<String> handleDelivery() throws IOException {
-
-        final ArrayList<String> bankMessage = new ArrayList<String>();
-
-        channel.queueDeclare(queueName, false, false, false, null);
-        System.out.println("\nWaiting for messages. To exit press CTRL+C");
-        System.out.println("====================================================");
-
-        Consumer consumer = new DefaultConsumer(channel) {
-            @Override
-            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-                String message = new String(body, "UTF-8");
-                bankMessage.add(message);
-                System.out.println("[Received] --> '" + message + "'");
-            }
-        };
-
-        channel.basicConsume(queueName, true, consumer);
-        return bankMessage;
-    }
-
-    public boolean isReady(){
-        return !getMessages().isEmpty();
     }
 
     private boolean createFactory() {
@@ -122,6 +80,31 @@ public class ReceiverController {
         return channel.isOpen();
     }
 
+    private ArrayList<String> handleDelivery() throws IOException {
+
+        final ArrayList<String> bankMessage = new ArrayList<String>();
+
+        channel.queueDeclare(queueName, false, false, false, null);
+        System.out.println("\nWaiting for messages. To exit press CTRL+C");
+        System.out.println("====================================================");
+
+        Consumer consumer = new DefaultConsumer(channel) {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                String message = new String(body, "UTF-8");
+                bankMessage.add(message);
+                System.out.println("[Received] --> '" + message + "'");
+            }
+        };
+
+        channel.basicConsume(queueName, true, consumer);
+        return bankMessage;
+    }
+
+    public boolean isReady(){
+        return !getMessages().isEmpty();
+    }
+
     public ArrayList<String> getMessages(){
         try {
             return handleDelivery();
@@ -130,4 +113,6 @@ public class ReceiverController {
         }
         return null;
     }
+
+
 }
