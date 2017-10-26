@@ -4,7 +4,6 @@ public class Loan {
     private int ssn,creditScore,
             loanAmount,date;
 
-
     public Loan(int ssn, int creditScore, int loanAmount, int date) {
         this.ssn = ssn;
         this.creditScore = creditScore;

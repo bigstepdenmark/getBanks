@@ -4,6 +4,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 import dk.cphsoftdev.app.entity.Bank;
+import dk.cphsoftdev.app.entity.Loan;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -79,29 +80,24 @@ public class SenderController {
         return channel.isOpen();
     }
 
-    public void SendMSG(Bank bank){
+    public String SendMSG(String msg){
          String response = "Message was not delivered!";
 
-        if(isValid(bank)){
-            response =  Publish( bank );
-        }
+            response =  Publish( msg );
 
-        System.out.println(response);
+        return msg;
     }
 
-    private boolean isValid(Bank bank){
-         return bank.getName() != null && bank.getMinCreditScore() >= 0;
-    }
 
-    private String Publish(Bank bank){
-        MessageController msg = new MessageController(bank);
+    private String Publish(String msg){
+
         try {
             channel.queueDeclare(queueName,false,false,false,null);
-            channel.basicPublish("",queueName,null,msg.asByteArray());
+            channel.basicPublish("",queueName,null,msg.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
-         return "[Sent] --> '" + msg.asString() + "'";
+         return "[Sent] --> '" + msg + "'";
     }
 
 }

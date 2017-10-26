@@ -1,8 +1,10 @@
 package dk.cphsoftdev.app.controller;
 
 import com.rabbitmq.client.*;
+import dk.cphsoftdev.app.entity.Bank;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeoutException;
 
 public class ReceiverController {
@@ -18,6 +20,8 @@ public class ReceiverController {
         this.queueName = queueName;
         this.host = host;
         this.username = username;
+
+        connect();
     }
 
     public void printMessages() {
@@ -54,7 +58,16 @@ public class ReceiverController {
         return false;
     }
 
-    private void handleDelivery() throws IOException {
+    private boolean isValid(Bank bank){
+        return bank.getName() != null && bank.getMinCreditScore() >= 0;
+    }
+
+
+
+    private ArrayList<String> handleDelivery() throws IOException {
+
+        final ArrayList<String> bankMessage = new ArrayList<String>();
+
         channel.queueDeclare(queueName, false, false, false, null);
         System.out.println("\nWaiting for messages. To exit press CTRL+C");
         System.out.println("====================================================");
@@ -63,16 +76,17 @@ public class ReceiverController {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 String message = new String(body, "UTF-8");
+                bankMessage.add(message);
                 System.out.println("[Received] --> '" + message + "'");
-
-                // Get message attributes ( EXAMPLE )
-                MessageController mc = new MessageController(message);
-                System.out.println("SSN: " + mc.getAttribute("ssn").asText());
-                System.out.println("Credit Score: " + mc.getAttribute("creditScore").asInt());
             }
         };
 
         channel.basicConsume(queueName, true, consumer);
+        return bankMessage;
+    }
+
+    public boolean isReady(){
+        return !getMessages().isEmpty();
     }
 
     private boolean createFactory() {
@@ -108,5 +122,12 @@ public class ReceiverController {
         return channel.isOpen();
     }
 
-
+    public ArrayList<String> getMessages(){
+        try {
+            return handleDelivery();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

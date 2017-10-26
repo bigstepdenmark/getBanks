@@ -5,14 +5,13 @@ public class Bank {
 
     private int minCreditScore;
     private String name;
-    private int TSId;
+    private String TSId;
 
 
-    public Bank(int minCreditScore, String name, int TSId) {
-        this.minCreditScore = minCreditScore;
-        this.name = name;
+    public Bank( String TSId) {
         this.TSId = TSId;
     }
+
 
     public int getMinCreditScore() {
         return minCreditScore;
@@ -30,11 +29,11 @@ public class Bank {
         this.name = name;
     }
 
-    public int getTSId() {
+    public String getTSId() {
         return TSId;
     }
 
-    public void setTSId(int TSId) {
+    public void setTSId(String TSId) {
         this.TSId = TSId;
     }
 
@@ -43,10 +42,9 @@ public class Bank {
         return "Bank{" +
                 "minCreditScore=" + minCreditScore +
                 ", name='" + name + '\'' +
-                ", TSId=" + TSId +
+                ", TSId='" + TSId + '\'' +
                 '}';
     }
-    
 }
 
 
