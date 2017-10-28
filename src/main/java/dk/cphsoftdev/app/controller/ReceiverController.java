@@ -82,7 +82,7 @@ public class ReceiverController {
 
     private ArrayList<String> handleDelivery() throws IOException {
 
-        final ArrayList<String> bankMessage = new ArrayList<String>();
+         ArrayList<String> bankMessage = new ArrayList<String>();
 
         channel.queueDeclare(queueName, false, false, false, null);
         System.out.println("\nWaiting for messages. To exit press CTRL+C");
@@ -113,6 +113,7 @@ public class ReceiverController {
         }
         return null;
     }
+
 
 
 }

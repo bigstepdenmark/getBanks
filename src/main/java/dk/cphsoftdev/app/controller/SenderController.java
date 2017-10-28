@@ -1,5 +1,6 @@
 package dk.cphsoftdev.app.controller;
 
+import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
@@ -10,17 +11,16 @@ import java.util.concurrent.TimeoutException;
 
 public class SenderController {
        private String username,
-                      queueName,
-                      host;
+                      host,
+                     EXCHANGE_NAME;
        private Connection connection;
        private Channel channel;
        private ConnectionFactory factory;
 
-
-    public SenderController(String username, String queueName, String host) {
+    public SenderController(String username, String host,String EXCHANGE_NAME) {
         this.username = username;
-        this.queueName = queueName;
         this.host = host;
+        this.EXCHANGE_NAME = EXCHANGE_NAME;
         connect();
     }
 
@@ -89,8 +89,8 @@ public class SenderController {
     private String Publish(String msg){
 
         try {
-            channel.queueDeclare(queueName,false,false,false,null);
-            channel.basicPublish("",queueName,null,msg.getBytes());
+            channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
+            channel.basicPublish(EXCHANGE_NAME,"",null,msg.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
