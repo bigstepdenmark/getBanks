@@ -41,12 +41,11 @@ public class ServiceController {
         return generateBankIds() + loanRequest ;
     }
 
-
     // Delete when finished
     public static void main(String[] args) {
         ServiceController s = new ServiceController(50, "1234567890,600,100.0,36");
 
-        String a = s.generateRecipListRequest();
+        String a = s.recipListRequest();
 
         System.out.println(a);
     }

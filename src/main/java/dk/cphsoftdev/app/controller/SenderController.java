@@ -12,7 +12,7 @@ import java.util.concurrent.TimeoutException;
 public class SenderController {
        private String username,
                       host,
-                     EXCHANGE_NAME;
+                      queueName;
        private Connection connection;
        private Channel channel;
        private ConnectionFactory factory;
@@ -20,7 +20,7 @@ public class SenderController {
     public SenderController(String username, String host,String EXCHANGE_NAME) {
         this.username = username;
         this.host = host;
-        this.EXCHANGE_NAME = EXCHANGE_NAME;
+        this.queueName = queueName;
         connect();
     }
 
@@ -80,17 +80,16 @@ public class SenderController {
 
     public String SendMSG(String msg){
          String response = "Message was not delivered!";
+         response =  Publish( msg );
 
-            response =  Publish( msg );
-
-        return msg;
+         return msg;
     }
 
     private String Publish(String msg){
 
         try {
-            channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
-            channel.basicPublish(EXCHANGE_NAME,"",null,msg.getBytes());
+            channel.queueDeclare( queueName, false, false, false, null );
+            channel.basicPublish("",queueName,null,msg.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
