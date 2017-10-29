@@ -17,7 +17,7 @@ public class SenderController {
        private Channel channel;
        private ConnectionFactory factory;
 
-    public SenderController(String username, String host,String EXCHANGE_NAME) {
+    public SenderController(String username, String host,String queueName) {
         this.username = username;
         this.host = host;
         this.queueName = queueName;
@@ -82,7 +82,7 @@ public class SenderController {
          String response = "Message was not delivered!";
          response =  Publish( msg );
 
-         return msg;
+         return response;
     }
 
     private String Publish(String msg){
