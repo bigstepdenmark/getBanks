@@ -1,24 +1,25 @@
 package dk.cphsoftdev.app.entity;
 public class Loan {
 
-    private int ssn,creditScore,
-            loanAmount,date;
+    private int creditScore,duration;
+    private String ssn;
+    private String loanAmount;
 
-    public Loan(int ssn, int creditScore, int loanAmount, int date) {
+    public Loan(String ssn, int creditScore, String loanAmount, int duration) {
         this.ssn = ssn;
         this.creditScore = creditScore;
         this.loanAmount = loanAmount;
-        this.date = date;
+        this.duration = duration;
     }
 
     public Loan() {
     }
 
-    public int getSsn() {
+    public String getSsn() {
         return ssn;
     }
 
-    public void setSsn(int ssn) {
+    public void setSsn(String ssn) {
         this.ssn = ssn;
     }
 
@@ -30,20 +31,20 @@ public class Loan {
         this.creditScore = creditScore;
     }
 
-    public int getLoanAmount() {
+    public String getLoanAmount() {
         return loanAmount;
     }
 
-    public void setLoanAmount(int loanAmount) {
+    public void setLoanAmount(String loanAmount) {
         this.loanAmount = loanAmount;
     }
 
     public int getDate() {
-        return date;
+        return duration;
     }
 
     public void setDate(int date) {
-        this.date = date;
+        this.duration = date;
     }
 
     @Override
@@ -52,7 +53,7 @@ public class Loan {
                 "ssn=" + ssn +
                 ", creditScore=" + creditScore +
                 ", loanAmount=" + loanAmount +
-                ", date=" + date +
+                ", date=" + duration +
                 '}';
     }
 }
