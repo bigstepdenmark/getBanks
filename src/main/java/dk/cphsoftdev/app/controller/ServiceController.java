@@ -6,7 +6,6 @@ import dk.cphsoftdev.app.webservice.BankControllerService;
 import java.util.Iterator;
 import java.util.List;
 
-// remember to refactor smaller method names
 public class ServiceController {
     private int creditScore;
     private String loanRequest;
@@ -21,7 +20,7 @@ public class ServiceController {
            return service.getBankControllerPort().getFilteredBanks(creditScore);
     }
 
-    public String generatebankIds(){
+    public String generateBankIds(){
         StringBuilder builder = new StringBuilder();
 
         List<Bank> banks = getBanks();
@@ -38,8 +37,8 @@ public class ServiceController {
         return builder.toString();
     }
 
-    public String generateRecipListRequest(){
-        return generatebankIds() + loanRequest ;
+    public String recipListRequest(){
+        return generateBankIds() + loanRequest ;
     }
 
 
