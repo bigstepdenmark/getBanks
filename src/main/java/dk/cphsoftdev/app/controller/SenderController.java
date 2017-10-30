@@ -79,7 +79,7 @@ public class SenderController {
     }
 
     public String SendMSG(String msg){
-         String response = "Message was not delivered!";
+         String response;
          response =  Publish( msg );
 
          return response;
