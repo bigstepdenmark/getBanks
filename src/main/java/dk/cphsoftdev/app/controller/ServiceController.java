@@ -17,7 +17,7 @@ public class ServiceController {
 
     public List<Bank> getBanks(){
         BankControllerService service = new BankControllerService();
-           return service.getBankControllerPort().getFilteredBanks(creditScore);
+        return service.getBankControllerPort().getFilteredBanks(creditScore);
     }
 
     public String generateBankIds(){

@@ -1,6 +1,6 @@
 package dk.cphsoftdev.app.controller;
 
-import org.apache.commons.lang3.StringUtils;
+
 import org.apache.commons.lang3.math.NumberUtils;
 
 public class Validator {
