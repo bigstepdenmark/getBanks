@@ -7,9 +7,6 @@ import dk.cphsoftdev.app.entity.Bank;
 import dk.cphsoftdev.app.entity.Loan;
 
 
-/**
- * Hello world!
- */
 public class Main
 {
     public static void main( String[] args ) {
@@ -19,10 +16,12 @@ public class Main
 
         if(receiver.isReady()){
                for (String msg: receiver.getMessages()) {
-                        sender.SendMSG(new Bank().getTSId() + "|" + new Loan().toString());
+                        sender.SendMSG(new Bank().getTSIds() + " | " + new Loan().toString());
                }
-                        sender.close();
-                        receiver.close();
+                 sender.close();
+                 receiver.close();
         }
     }
+
+
 }

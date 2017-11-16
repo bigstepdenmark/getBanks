@@ -7,7 +7,6 @@ import com.rabbitmq.client.Channel;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-
 public class SenderController {
        private String username,
                       host,
@@ -94,6 +93,7 @@ public class SenderController {
         }
          return "[Sent] --> '" + msg + "'";
     }
+
 
 }
 
