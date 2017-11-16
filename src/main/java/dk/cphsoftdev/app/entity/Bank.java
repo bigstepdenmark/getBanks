@@ -1,17 +1,20 @@
 // This applications purpose is determine the most appropriate banks from rule base web service
 package dk.cphsoftdev.app.entity;
 
+import java.util.ArrayList;
+
 public class Bank {
 
     private int minCreditScore;
     private String name;
-    private String TSId;
+    private ArrayList<String> TSIds;
 
-
-    public Bank( String TSId) {
-        this.TSId = TSId;
+    public Bank() {
     }
 
+    public Bank(ArrayList<String> TSIds) {
+        this.TSIds = TSIds;
+    }
 
     public int getMinCreditScore() {
         return minCreditScore;
@@ -29,12 +32,12 @@ public class Bank {
         this.name = name;
     }
 
-    public String getTSId() {
-        return TSId;
+    public ArrayList<String> getTSIds() {
+        return TSIds;
     }
 
-    public void setTSId(String TSId) {
-        this.TSId = TSId;
+    public void setTSId(ArrayList<String> TSIds) {
+        this.TSIds = TSIds;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class Bank {
         return "Bank{" +
                 "minCreditScore=" + minCreditScore +
                 ", name='" + name + '\'' +
-                ", TSId='" + TSId + '\'' +
+                ", TSIsd=" + TSIds +
                 '}';
     }
 }
