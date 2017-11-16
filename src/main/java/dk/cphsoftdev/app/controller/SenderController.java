@@ -78,7 +78,7 @@ public class SenderController {
     }
 
     public String SendMSG(String msg){
-         String response;
+         String response = "Message could not be sent!";
          response =  Publish( msg );
 
          return response;
