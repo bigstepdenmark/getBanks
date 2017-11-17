@@ -7,12 +7,10 @@ import dk.cphsoftdev.app.entity.Bank;
 import dk.cphsoftdev.app.entity.Loan;
 
 
-public class Main
-{
+public class Main {
     public static void main( String[] args ) {
         ReceiverController receiver = new ReceiverController("group3.creditscore.getbanks1","datdb.cphbusiness.dk","guest");
         SenderController sender = new SenderController("guest","datdb.cphbusiness.dk","group3.getbanks.reciplist");
-
 
         if(receiver.isReady()){
                for (String msg: receiver.getMessages()) {
@@ -22,6 +20,4 @@ public class Main
                  receiver.close();
         }
     }
-
-
 }
