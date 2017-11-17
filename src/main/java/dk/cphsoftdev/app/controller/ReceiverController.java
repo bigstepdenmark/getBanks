@@ -115,12 +115,10 @@ public class ReceiverController {
     }
 
     public void printMessages() {
-        try
-        {
+        try {
             handleDelivery();
         }
-        catch( IOException e )
-        {
+        catch( IOException e ) {
             e.printStackTrace();
         }
     }
